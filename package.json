@@ -2,6 +2,9 @@
   "name": "api",
   "version": "0.0.0",
   "private": true,
+  "engines" : {
+    "node" : ">=8.11.3"
+  },
   "dependencies": {
     "keyblade": "^0.3.2",
     "koa": "^2.5.1",
@@ -32,11 +35,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "lint-staged": "^6.0.0",
     "prettier": "^1.9.2"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/tools/jest.setup.js"
   },
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
