@@ -43,8 +43,8 @@ This project was bootstraped with [Node.js API Starter Kit][nodejskit].
 Just clone the repo and run `docker-compose up`:
 
 ```bash
-git clone https://github.com/kriasoft/nodejs-api-starter.git example-api
-cd example-api                  # Change current directory to the newly created one
+git clone https://github.com/APXLabs/nodejs-api-startergit api
+cd api                          # Change current directory to the newly created one
 docker-compose up               # Launch Docker containers with the Node.js API app running inside
 ```
 
@@ -68,7 +68,6 @@ section in the [`package.json`](./package.json) file and the [`tools`](./tools) 
 
 ```bash
 yarn lint                       # Find problematic patterns in code
-yarn check                      # Check source code for type errors
 yarn docker-test                # Run unit tests once inside a Docker container
 yarn docker-test-watch          # Run unit tests in watch mode inside a Docker container
 ```
