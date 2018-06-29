@@ -5,7 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
 /* eslint-disable no-param-reassign, no-underscore-dangle, max-len */
 
 import passport from 'passport';

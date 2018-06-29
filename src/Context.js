@@ -5,7 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
 
 import DataLoader from 'dataloader';
 import type { request as Request } from 'express';

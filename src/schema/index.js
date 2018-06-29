@@ -5,8 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 
 import userQueries from './user/queries';

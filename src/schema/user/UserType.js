@@ -5,8 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import { GraphQLObjectType, GraphQLList, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 

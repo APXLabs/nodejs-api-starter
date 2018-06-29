@@ -5,8 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import redis from 'redis';
 import bluebird from 'bluebird';
 import errors from './errors';

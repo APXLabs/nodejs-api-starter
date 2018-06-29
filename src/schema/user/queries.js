@@ -5,8 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import UserType from './UserType';
 import type Context from '../../Context';
 

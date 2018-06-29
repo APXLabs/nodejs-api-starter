@@ -17,7 +17,7 @@ This project was bootstraped with [Node.js API Starter Kit][nodejskit] ([support
 
 ## Tech Stack
 
-* [Docker][docker], [Node.js][node], [Yarn][yarn], [JavaScript][js], [Babel][babel], [Flow][flow], [Prettier][prettier] — core platform and dev tools
+* [Docker][docker], [Node.js][node], [Yarn][yarn], [JavaScript][js], [Babel][babel], [Prettier][prettier] — core platform and dev tools
 * [Express][express], [Passport.js][passport], [session][session], [flash][flash], [cors][cors] etc. — common HTTP-server features
 * [GraphQL.js][gqljs], [GraphQL.js Relay][gqlrelay], [DataLoader][loader], [validator][validator] — [GraphQL][gql] schema and API endpoint
 * [PostgreSQL][pg], [Redis][redis], [Knex][knex], [pg][nodepg] — SQL, document, key/value data store; data acess and migrations
@@ -46,7 +46,6 @@ This project was bootstraped with [Node.js API Starter Kit][nodejskit] ([support
 │   ├── /passport.js            # Passport.js authentication strategies
 │   ├── /redis.js               # Redis client
 │   ├── /server.js              # Node.js server (entry point)
-│   └── /types.js               # Flow type definitions
 ├── /tools/                     # Build automation scripts and utilities
 ├── docker-compose.yml          # Defines Docker services, networks and volumes
 ├── docker-compose.override.yml # Overrides per developer environment (not under source control)
@@ -60,7 +59,7 @@ This project was bootstraped with [Node.js API Starter Kit][nodejskit] ([support
 
 * [Docker][docker] Community Edition v17 or higher
 * [VS Code][code] editor (preferred) + [Project Snippets][vcsnippets],
-  [EditorConfig][vceditconfig], [ESLint][vceslint], [Flow][vcflow], and [Prettier][vcprettier]
+  [EditorConfig][vceditconfig], [ESLint][vceslint], and [Prettier][vcprettier]
   plug-ins.
 
 
@@ -202,7 +201,6 @@ Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya), [bl
 [node]: https://nodejs.org
 [js]: https://developer.mozilla.org/docs/Web/JavaScript
 [babel]: http://babeljs.io/
-[flow]: https://flow.org/
 [prettier]: https://prettier.io/
 [gql]: http://graphql.org/
 [gqljs]: https://github.com/graphql/graphql-js
@@ -221,7 +219,6 @@ Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya), [bl
 [vcsnippets]: https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 [vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-[vcflow]: https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
 [vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 [docker]: https://www.docker.com/community-edition
 [compose]: https://docs.docker.com/compose/

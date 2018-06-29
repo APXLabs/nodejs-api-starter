@@ -5,8 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import URL from 'url';
 import passport from 'passport';
 import validator from 'validator';

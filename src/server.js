@@ -5,7 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
 /* eslint-disable no-console, no-shadow */
 
 import app from './app';

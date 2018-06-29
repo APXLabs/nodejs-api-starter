@@ -5,8 +5,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import { GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql';
 import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
 

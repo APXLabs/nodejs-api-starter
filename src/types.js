@@ -1,4 +1,3 @@
-/* @flow */
 
 export type ValidationErrorEntry = {
   key: string,
