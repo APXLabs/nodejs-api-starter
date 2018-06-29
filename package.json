@@ -9,7 +9,6 @@
     "koa-compress": "^3.0.0",
     "koa-respond": "^1.0.1",
     "koa-router": "^7.4.0",
-    "pretty-error": "^2.1.1",
     "winston": "^3.0.0"
   },
   "devDependencies": {
