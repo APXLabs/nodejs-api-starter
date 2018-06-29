@@ -39,7 +39,7 @@ function spawnServer() {
         [],
       ),
       // If the parent Node.js process is running in debug (inspect) mode,
-      // launch a debugger for Express.js app on the next port
+      // launch a debugger for Koa.js app on the next port
       ...process.execArgv.map(arg => {
         if (arg.startsWith('--inspect')) {
           const match = arg.match(/^--inspect=(\S+:|)(\d+)$/);
@@ -62,8 +62,8 @@ function spawnServer() {
 }
 
 module.exports = task('run', () =>
+  // Compile and launch the app in watch mode, restart it after each rebuild
   Promise.resolve()
-    // Compile and launch the app in watch mode, restart it after each rebuild
     .then(() =>
       build({
         watch: true,

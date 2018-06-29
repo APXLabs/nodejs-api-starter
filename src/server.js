@@ -11,7 +11,7 @@ import app from './app';
 import env from './env';
 
 const port = env.PORT;
-const host = process.env.HOSTNAME || '0.0.0.0';
+const host = env.HOSTNAME;
 
 // Launch Node.js server
 const server = app.listen(port, host, () => {

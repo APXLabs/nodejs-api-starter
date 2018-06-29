@@ -17,8 +17,8 @@ This project was bootstraped with [Node.js API Starter Kit][nodejskit].
 .
 ├── /build/                     # The compiled output (via Babel)
 ├── /src/                       # Node.js application source files
-│   ├── /routes/                # Express routes, e.g. /login/facebook
-│   ├── /app.js                 # Express.js application
+│   ├── /routes/                # Koa routes, e.g. /login/facebook
+│   ├── /app.js                 # Koa.js application
 │   ├── /logger.js              # Winston Logger
 │   ├── /env.js                 # Environment variables
 │   ├── /server.js              # Node.js server (entry point)
@@ -83,45 +83,15 @@ file or, even better, in `docker-compose.override.yml`. Then restart the app (`d
 [attach your debugger][vsdebug] to `127.0.0.1:9230` (see [`.vscode/launch.json`](./.vscode/launch.json))
 
 
-## Keeping Up-to-Date
-
-If you keep the original Git history after cloning this repo, you can always fetch and merge
-the recent updates back into your project by running:
-
-```bash
-git remote add nodejs-api-starter https://github.com/kriasoft/nodejs-api-starter.git
-git checkout master
-git fetch nodejs-api-starter
-git merge nodejs-api-starter/master
-docker-compose build --no-cache
-docker-compose run --rm --no-deps api yarn
-docker-compose up
-```
-
 *NOTE: Try to merge as soon as the new changes land on the master branch in Node.js API Starter
 repository, otherwise your project may differ too much from the base/upstream repo.*
 
 
 [nodejskit]: https://github.com/kriasoft/nodejs-api-starter
-[rsk]: https://github.com/kriasoft/react-starter-kit
-[rsb]: https://github.com/kriasoft/react-static-boilerplate
 [node]: https://nodejs.org
 [js]: https://developer.mozilla.org/docs/Web/JavaScript
 [babel]: http://babeljs.io/
 [prettier]: https://prettier.io/
-[gql]: http://graphql.org/
-[gqljs]: https://github.com/graphql/graphql-js
-[gqlrelay]: https://github.com/graphql/graphql-relay-js
-[yarn]: https://yarnpkg.com
-[demo]: https://graphql-demo.kriasoft.com/
-[express]: http://expressjs.com/
-[session]: https://github.com/expressjs/session
-[flash]: https://github.com/expressjs/flash
-[cors]: https://github.com/expressjs/cors
-[pg]: https://www.postgresql.org/
-[nodepg]: https://github.com/brianc/node-postgres
-[psql]: https://www.postgresql.org/docs/current/static/app-psql.html
-[do]: https://m.do.co/c/eef302dbae9f
 [code]: https://code.visualstudio.com/
 [vcsnippets]: https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
@@ -131,16 +101,4 @@ repository, otherwise your project may differ too much from the base/upstream re
 [compose]: https://docs.docker.com/compose/
 [v8debug]: https://chromedevtools.github.io/debugger-protocol-viewer/v8/
 [vsdebug]: https://code.visualstudio.com/Docs/editor/debugging
-[passport]: http://passportjs.org/
-[redis]: https://redis.io/
-[knex]: http://knexjs.org/
-[loader]: https://github.com/facebook/dataloader
-[validator]: https://github.com/chriso/validator.js
-[mailer]: https://nodemailer.com/
-[hbs]: http://handlebarsjs.com/
-[juice]: https://github.com/Automattic/juice
-[i18next]: https://www.i18next.com/
-[i18nextmid]: https://github.com/i18next/i18next-express-middleware
-[i18nextback]: https://github.com/i18next/i18next-node-fs-backend
 [jest]: http://facebook.github.io/jest/
-[gitter]: https://gitter.im/kriasoft/nodejs-api-starter
