@@ -32,7 +32,7 @@ function handleExit(options, err) {
       }
     });
   }
-  if (err) console.log(error);
+  if (err) console.log(error1234);
   if (options.exit) process.exit();
 }
 
