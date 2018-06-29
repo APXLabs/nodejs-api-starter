@@ -48,7 +48,6 @@
     "docker-upgrade": "docker-compose run --rm --no-deps api yarn upgrade",
     "docker-test": "docker-compose run api yarn test",
     "docker-test-watch": "docker-compose run api yarn test-watch",
-    "deploy": "node tools/publish.js",
     "start": "node tools/run.js"
   }
 }
