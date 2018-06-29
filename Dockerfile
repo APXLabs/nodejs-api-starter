@@ -1,4 +1,4 @@
-FROM node:8.9.3-alpine
+FROM node:8.11.3-alpine
 
 ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
@@ -6,15 +6,11 @@ ENV NODE_ENV=$NODE_ENV
 # Set a working directory
 WORKDIR /usr/src/app
 
-# Install native dependencies
-# RUN set -ex; \
-#   apk add --no-cache ...
-
 # Install Node.js dependencies
 COPY package.json yarn.lock ./
 RUN set -ex; \
   if [ "$NODE_ENV" = "production" ]; then \
-  yarn install --no-cache --frozen-lockfile --production; \
+  yarn install --silent --no-cache --frozen-lockfile --production; \
   elif [ "$NODE_ENV" = "test" ]; then \
   touch yarn-error.log; \
   mkdir -m 777 build; \
@@ -26,11 +22,6 @@ RUN set -ex; \
   chown -R node:node build node_modules package.json yarn.lock yarn-error.log /home/node/.cache/yarn; \
   fi;
 
-# Copy application files
-COPY tools ./tools/
-COPY migrations ./migrations/
-COPY seeds ./seeds/
-COPY locales ./locales/
 # Attempts to copy "build" folder even if it doesn't exist
 COPY .env build* ./build/
 

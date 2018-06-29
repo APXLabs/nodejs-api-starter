@@ -1,10 +1,4 @@
 #!/usr/bin/env node
-/**
- * Copyright © 2016-present Kriasoft.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
 
 const cp = require('child_process');
 const pkg = require('../package.json');
@@ -69,10 +63,6 @@ function spawnServer() {
 
 module.exports = task('run', () =>
   Promise.resolve()
-    // Migrate database schema to the latest version
-    .then(() => {
-      cp.spawnSync('node', ['tools/db.js', 'migrate'], { stdio: 'inherit' });
-    })
     // Compile and launch the app in watch mode, restart it after each rebuild
     .then(() =>
       build({

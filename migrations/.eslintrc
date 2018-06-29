@@ -1,9 +1,0 @@
-{
-  "extends": ["airbnb-base"],
-  "rules": {
-    "arrow-parens": "off",
-    "newline-per-chained-call": "off",
-    "no-console": "off",
-    "prettier/prettier": "off"
-  }
-}
