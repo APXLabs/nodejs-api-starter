@@ -1,24 +1,11 @@
-import winston from 'winston';
+import { createLogger, format, transports } from 'winston';
+import env from './env';
 
-const timestampFormat = () => new Date().toLocaleTimeString();
-const prettyprintFormat = obj => JSON.stringify(obj, null, 2);
+const { combine, timestamp, prettyPrint } = format;
 
-const logger = winston.createLogger({
-  transports: [
-    new winston.transports.Console({
-      timestamp: timestampFormat,
-      colorize: true,
-      level: 'debug',
-      prettyPrint: prettyprintFormat,
-    }),
-  ],
+const logger = createLogger({
+  format: combine(timestamp(), prettyPrint()),
+  transports: [new transports.Console({ level: env.LOG_LEVEL })],
 });
-
-logger.stream = {
-  /* eslint-disable no-unused-vars */
-  write: (message, encoding) => {
-    logger.info(message);
-  },
-};
 
 export default logger;

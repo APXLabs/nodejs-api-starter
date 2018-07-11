@@ -4,7 +4,7 @@ import app from './app';
 import env from './env';
 
 const port = env.PORT;
-const host = env.HOSTNAME;
+const host = env.LISTEN_IP;
 
 // Launch Node.js server
 const server = app.listen(port, host, () => {

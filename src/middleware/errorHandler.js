@@ -1,5 +1,4 @@
 import logger from '../logger';
-import env from '../env';
 
 /**
  * Error handler middleware.
@@ -9,13 +8,10 @@ export async function errorHandler(ctx, next) {
   try {
     await next();
   } catch (err) {
-    /* istanbul ignore next */
     ctx.status = err.statusCode || 500;
-    ctx.body = err.toJSON ? err.toJSON() : { message: err.message, ...err };
-    /* istanbul ignore next */
-    if (!env.EMIT_STACK_TRACE) {
-      delete ctx.body.stack;
-    }
+    ctx.body = { message: err.httpMessage };
+    delete ctx.body.stack;
+    delete ctx.body.statusCode;
     logger.error(err);
   }
 }

@@ -3,7 +3,7 @@ import Router from 'koa-router';
 const router = new Router();
 
 router.get(`/`, ctx => {
-  ctx.body = 'This is your default endpoint';
+  ctx.body = 'Hello World!';
 });
 
 router.get(`/error`, () => {

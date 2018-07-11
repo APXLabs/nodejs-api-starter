@@ -17,7 +17,7 @@ This project was bootstraped with [Node.js API Starter Kit][nodejskit].
 .
 ├── /build/                     # The compiled output (via Babel)
 ├── /src/                       # Node.js application source files
-│   ├── /routes/                # Koa routes, e.g. /login/facebook
+│   ├── /routes/                # Koa routes
 │   ├── /app.js                 # Koa.js application
 │   ├── /logger.js              # Winston Logger
 │   ├── /env.js                 # Environment variables
