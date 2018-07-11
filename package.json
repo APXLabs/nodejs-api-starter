@@ -15,10 +15,10 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
-    "babel-jest": "^22.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -31,23 +31,27 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "prettier": "^1.9.2"
+    "jest": "^23.4.0",
+    "lodash": "^4.17.10",
+    "prettier": "^1.9.2",
+    "smid": "^0.1.1"
   },
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
-    "test": "jest --testEnvironment=node",
+    "test": "env $(cat .env) jest",
     "build": "node tools/build.js",
     "build-watch": "node tools/build.js --watch",
     "docker": "docker-compose run --rm api yarn",
     "docker-install": "docker-compose run --rm --no-deps api yarn install",
     "docker-upgrade": "docker-compose run --rm --no-deps api yarn upgrade",
-    "docker-test": "docker-compose run api yarn test",
-    "docker-test-watch": "docker-compose run api yarn test-watch",
+    "docker-test": "docker-compose run api yarn install && yarn test",
+    "docker-test-watch": "docker-compose run api yarn install && yarn test --watch",
     "dev": "env $(cat .env) node tools/run.js",
     "start": "node tools/run.js"
   }

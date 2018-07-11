@@ -1,20 +1,26 @@
 /* eslint-disable no-console, no-shadow */
 
-import app from './app';
+import createServer from './app';
 import env from './env';
-
-const port = env.PORT;
-const host = env.LISTEN_IP;
+import logger from './logger';
 
 // Launch Node.js server
-const server = app.listen(port, host, () => {
-  console.log(`Server is listening on http://${host}:${port}/`);
-});
+createServer().then(
+  app =>
+    app.listen(env.PORT, () => {
+      const mode = env.NODE_ENV;
+      logger.debug(`Server listening on ${env.PORT} in ${mode} mode`);
+    }),
+  err => {
+    logger.error('Error while starting up server', err);
+    process.exit(1);
+  },
+);
 
 // Shutdown Node.js app gracefully
 function handleExit(options, err) {
   if (options.cleanup) {
-    const actions = [server.close];
+    const actions = [createServer.close];
     actions.forEach((close, i) => {
       try {
         close(() => {

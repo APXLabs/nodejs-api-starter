@@ -4,6 +4,7 @@ services:
 
   # Data API and authentication/authorization
   api:
+    container_name: api
     image: api
     build:
       context: ./
@@ -20,6 +21,8 @@ services:
       - "127.0.0.1:9230:9230" # V8 inspector for src/server.js
     volumes:
       - yarn:/home/node/.cache/yarn
+      - ./.env:/usr/src/app/.env
+      - ./jest.config.js:/usr/src/app/jest.config.js
       - ./build:/usr/src/app/build
       - ./src:/usr/src/app/src
       - ./tools:/usr/src/app/tools
@@ -30,6 +33,5 @@ services:
       - ./package.json:/usr/src/app/package.json
       - ./yarn.lock:/usr/src/app/yarn.lock
     command: node --inspect=0.0.0.0:9229 tools/run.js
-
 volumes:
   yarn:

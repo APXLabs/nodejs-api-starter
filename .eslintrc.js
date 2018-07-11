@@ -6,7 +6,7 @@ const prettierOptions = JSON.parse(fs.readFileSync('./.prettierrc', 'utf8'));
 // https://github.com/prettier/prettier#eslint
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['standard', 'prettier'],
+  extends: ['standard', 'prettier', 'plugin:jest/recommended'],
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
