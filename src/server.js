@@ -7,9 +7,11 @@ import logger from './logger';
 // Launch Node.js server
 createServer().then(
   app =>
-    app.listen(env.PORT, () => {
+    app.listen(env.PORT, env.LISTEN_IP, () => {
       const mode = env.NODE_ENV;
-      logger.debug(`Server listening on ${env.PORT} in ${mode} mode`);
+      logger.debug(
+        `Server listening on ${env.LISTEN_IP}:${env.PORT} in ${mode} mode`,
+      );
     }),
   err => {
     logger.error('Error while starting up server', err);
