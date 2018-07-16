@@ -55,6 +55,6 @@
     "docker-test": "docker-compose run api yarn install && yarn test",
     "docker-test-watch": "docker-compose run api yarn install && yarn test --watch",
     "dev": "env $(cat .env) node tools/run.js",
-    "start": "node tools/run.js"
+    "start": "node build/server.js"
   }
 }

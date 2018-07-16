@@ -12,7 +12,7 @@ const modulesToLoad = [
   ['services/*.js', Lifetime.SCOPED],
   // Stores will be singleton (1 instance per process).
   // This is just for demo purposes, you can do whatever you want.
-  ['stores/*.js', Lifetime.SINGLETON],
+  // ['stores/*.js', Lifetime.SINGLETON],
 ];
 
 /**
