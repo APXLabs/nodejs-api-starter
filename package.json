@@ -6,6 +6,8 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "awilix": "^3.0.8",
+    "awilix-koa": "^2.1.1",
     "keyblade": "^0.3.2",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",

@@ -1,15 +1,9 @@
-import Router from 'koa-router';
-import logger from '../logger';
+import { createController } from 'awilix-koa';
 
-const router = new Router();
-
-router.get(`/`, ctx => {
-  logger.debug('Hit default endpoint');
-  ctx.body = 'Hello World!';
+const api = defaultService => ({
+  default: async ctx => ctx.ok(await defaultService.default()),
 });
 
-router.get(`/error`, () => {
-  throw new Error('Internal Server Error');
-});
-
-export default router;
+export default createController(api)
+  .prefix('/')
+  .get('', 'default');

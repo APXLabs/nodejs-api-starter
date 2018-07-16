@@ -2,19 +2,18 @@
 
 import createServer from './app';
 import env from './env';
-import logger from './logger';
 
 // Launch Node.js server
 createServer().then(
   app =>
     app.listen(env.PORT, env.LISTEN_IP, () => {
       const mode = env.NODE_ENV;
-      logger.debug(
+      console.debug(
         `Server listening on ${env.LISTEN_IP}:${env.PORT} in ${mode} mode`,
       );
     }),
   err => {
-    logger.error('Error while starting up server', err);
+    console.error('Error while starting up server', err);
     process.exit(1);
   },
 );
