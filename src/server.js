@@ -29,7 +29,7 @@ createServer().then(
       console.debug(
         `Server listening on ${env.LISTEN_IP}:${env.PORT} in ${mode} mode`,
       );
-      process.on('exit', handleExit.bind(null, { cleanup: true }));
+      // process.on('exit', handleExit.bind(null, { cleanup: true }));
       process.on('SIGINT', handleExit.bind(null, { exit: true }));
       process.on('SIGTERM', handleExit.bind(null, { exit: true }));
       process.on('uncaughtException', handleExit.bind(null, { exit: true }));

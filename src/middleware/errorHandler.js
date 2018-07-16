@@ -9,7 +9,7 @@ export async function errorHandler(ctx, next) {
     await next();
   } catch (err) {
     ctx.status = err.statusCode || 500;
-    ctx.body = { message: err.httpMessage };
+    ctx.body = { message: err.message };
     delete ctx.body.stack;
     delete ctx.body.statusCode;
     logger.error(err);
