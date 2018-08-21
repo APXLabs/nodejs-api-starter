@@ -1,22 +1,22 @@
-import createServer from '../app';
-import { memoize } from 'lodash';
-import axios from 'axios';
+const createServer = require('../app')
+const { memoize } = require('lodash')
+const axios = require('axios')
 
 /**
  * API helper to make it easier to test endpoints.
  */
-export async function apiHelper() {
-  const server = await startServer();
-  const baseURL = `http://127.0.0.1:${server.address().port}`;
+async function apiHelper() {
+  const server = await startServer()
+  const baseURL = `http://127.0.0.1:${server.address().port}`
   const client = axios.create({
-    baseURL,
-  });
+    baseURL
+  })
 
   return {
     catch: catchAndLog, // Useful for logging failing requests
-    client,
+    client
     // Add your app-specific methods here.
-  };
+  }
 }
 
 /**
@@ -25,17 +25,17 @@ export async function apiHelper() {
  *
  * @param {number} status
  */
-export function assertStatus(status) {
+function assertStatus(status) {
   return async function statusAsserter(resp) {
     if (resp.status !== status) {
       throw new Error(
         `Expected ${status} but got ${resp.status}: ${resp.request.method} ${
           resp.request.path
-        }`,
-      );
+        }`
+      )
     }
-    return resp.data;
-  };
+    return resp.data
+  }
 }
 
 function catchAndLog(err) {
@@ -44,19 +44,24 @@ function catchAndLog(err) {
       `Error ${err.response.status} in request ${err.response.request.method} ${
         err.response.request.path
       }`,
-      err.response.data,
-    );
+      err.response.data
+    )
   }
-  throw err;
+  throw err
 }
 
 const startServer = memoize(async () => {
-  return (await createServer()).listen();
-});
+  return (await createServer()).listen()
+})
 
 afterAll(async () => {
   // Server is memoized so it won't start a new one.
   // We need to close it.
-  const server = await startServer();
-  return new Promise(resolve => server.close(resolve));
-});
+  const server = await startServer()
+  return new Promise(resolve => server.close(resolve))
+})
+
+module.exports = {
+  apiHelper,
+  assertStatus
+}

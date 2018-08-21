@@ -1,21 +1,19 @@
-import { createLogger, format, transports } from 'winston';
-import env from './env';
+const { createLogger, format, transports } = require('winston')
 
-const { combine, timestamp, printf } = format;
+const { combine, timestamp, printf } = format
 
 const myFormat = printf(info => {
-  console.log(info);
-  return `${info.timestamp} ${info.level}: ${info.message}`;
-});
+  console.log(info)
+  return `${info.timestamp} ${info.level}: ${info.message}`
+})
 
 const logger = createLogger({
   format: combine(timestamp(), myFormat),
   transports: [
     new transports.Console({
-      level: env.LOG_LEVEL,
-      handleExceptions: true,
-    }),
-  ],
-});
+      handleExceptions: true
+    })
+  ]
+})
 
-export default logger;
+module.exports = logger

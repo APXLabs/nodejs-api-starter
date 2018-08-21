@@ -1,35 +1,38 @@
-version: '3'
+version: '3.1'
 
 services:
-
-  # API
   api:
     container_name: api
-    image: api
     build:
-      context: ./
+      context: .
       args:
         NODE_ENV: development
     hostname: api
     environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
       - PORT=5000
       - LISTEN_IP=0.0.0.0
+      - MONGO_URI=mongodb://mongo:27017/app
     ports:
-      - "5000:5000"
-      - "127.0.0.1:9229:9229" # V8 inspector for tools/run.js
-      - "127.0.0.1:9230:9230" # V8 inspector for src/server.js
+      - '5000:5000'
+      - '127.0.0.1:9229:9229' # V8 inspector for debugging
     volumes:
       - yarn:/home/node/.cache/yarn
-      - ./jest.config.js:/usr/src/app/jest.config.js
-      - ./build:/usr/src/app/build
-      - ./src:/usr/src/app/src
-      - ./tools:/usr/src/app/tools
-      - ./.babelrc:/usr/src/app/.babelrc
-      - ./.eslintrc.js:/usr/src/app/.eslintrc.js
-      - ./.gitignore:/usr/src/app/.gitignore
-      - ./.prettierrc:/usr/src/app/.prettierrc
-      - ./package.json:/usr/src/app/package.json
-      - ./yarn.lock:/usr/src/app/yarn.lock
-    command: node --inspect=0.0.0.0:9229 tools/run.js
+      - .:/opt/app:delegated
+      - ./package.json:/opt/app/package.json
+      - ./yarn.lock:/opt/app/yarn.lock
+    command: ../node_modules/.bin/nodemon --inspect=0.0.0.0:9229 src/server.js
+  mongo:
+    container_name: mongo
+    image: mongo:3.4.6
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
 volumes:
-  yarn:
+  ? yarn
+  ? notused
+  ? mongo

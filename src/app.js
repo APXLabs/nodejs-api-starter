@@ -1,27 +1,22 @@
-import http from 'http';
-import Koa from 'koa';
-import respond from 'koa-respond';
-import bodyParser from 'koa-bodyparser';
-import compress from 'koa-compress';
-import { scopePerRequest, loadControllers } from 'awilix-koa';
+const http = require('http')
+const Koa = require('koa')
+const respond = require('koa-respond')
+const bodyParser = require('koa-bodyparser')
+const { scopePerRequest, loadControllers } = require('awilix-koa')
 
-import { notFoundHandler } from './middleware/notFoundHandler';
-import { errorHandler } from './middleware/errorHandler';
-import { configureContainer } from './container';
-
-// import defaultRouter from './routes/index';
+const notFoundHandler = require('./middleware/notFoundHandler')
+const errorHandler = require('./middleware/errorHandler')
+const configureContainer = require('./container')
 
 async function createServer() {
-  console.debug('Creating Server');
-  const app = new Koa();
+  console.debug('Creating Server')
+  const app = new Koa()
 
   // Container is configured with our services and whatnot.
-  const container = (app.container = configureContainer());
+  const container = (app.container = configureContainer())
   app
     // Top middleware is the error handler.
     .use(errorHandler)
-    // Compress all responses.
-    .use(compress())
     // Adds ctx.ok(), ctx.notFound(), etc..
     .use(respond())
     // Parses request bodies.
@@ -32,12 +27,12 @@ async function createServer() {
     // Load routes (API "controllers")
     .use(loadControllers('./routes/*.js', { cwd: __dirname }))
     // Default handler when nothing stopped the chain.
-    .use(notFoundHandler);
+    .use(notFoundHandler)
 
   // Creates a http server ready to listen.
-  const server = http.createServer(app.callback());
+  const server = http.createServer(app.callback())
 
-  return server;
+  return server
 }
 
-export default createServer;
+module.exports = createServer

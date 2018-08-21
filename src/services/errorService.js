@@ -1,10 +1,11 @@
-import logger from '../logger';
-
 class ErrorService {
+  constructor(logger) {
+    this.logger = logger
+  }
   async default() {
-    logger.error('An error was processed');
-    throw new Error('Internal Server Error');
+    this.logger.error('An error was processed')
+    throw new Error('Internal Server Error')
   }
 }
 
-export default ErrorService;
+module.exports = ErrorService
