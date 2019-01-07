@@ -1,21 +1,9 @@
-const {
-  createContainer,
-  Lifetime,
-  InjectionMode,
-  asValue,
-  asClass
-} = require('awilix')
+const { createContainer, Lifetime, InjectionMode, asValue } = require('awilix')
+const mongodb = require('@upskill/nucleus-mongodb')
 
-const env = require('./env')
+// Initialize Configurator
+const config = require('./config')
 const logger = require('./logger')
-const Mongo = require('./mongo')
-
-const db = new Mongo(env.MONGO_URI)
-db.connect()
-  .then(() => {})
-  .catch(err => {
-    console.log(err.message)
-  })
 
 /**
  * Using Awilix, the following files and folders (glob patterns)
@@ -36,7 +24,18 @@ const modulesToLoad = [
  *
  * @return {Object} The container.
  */
-function configureContainer() {
+async function configureContainer() {
+  // Initialize MongoDB
+  await mongodb
+    .connect(
+      config.mongodb,
+      logger
+    )
+    .catch(err => {
+      logger.error(err)
+      process.exit(1)
+    })
+
   const opts = {
     // Classic means Awilix will look at function parameter
     // names rather than passing a Proxy.
@@ -54,7 +53,7 @@ function configureContainer() {
       // Our logger is already constructed,
       // so provide it as-is to anyone who wants it.
       logger: asValue(logger),
-      db: asValue(db, { lifetime: Lifetime.SINGLETON })
+      mongodb: asValue(mongodb)
     })
 }
 

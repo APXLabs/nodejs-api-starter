@@ -1,0 +1,44 @@
+port: 10004
+
+logger:
+  level: debug
+  transports:
+    console:
+      outputFormat: rich
+
+mongodb:
+  host: mongo
+  port: 27017
+  username: ''
+  password: ''
+  database: skylight
+  options:
+    replicaSet: ''
+    connectTimeoutMS: 3000
+    reconnectTries: 15
+    readPreference: primaryPreferred
+
+amqp:
+  hostname: localhost
+  port: 5672
+  vhost: ''
+  username: ''
+  password: ''
+  maxReconnectTries: 10
+  exchanges:
+    mqttTopic: amq.topic
+  queues:
+    assignments: assignments
+
+externalServices:
+  assignment:
+    url: http://localhost:8080
+  bulwark:
+    url: http://localhost:10103
+
+constants:
+  auth:
+    scopes:
+      assignment:
+        assign:
+          any: assignment:assign

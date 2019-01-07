@@ -9,11 +9,10 @@ const errorHandler = require('./middleware/errorHandler')
 const configureContainer = require('./container')
 
 async function createServer() {
-  console.debug('Creating Server')
   const app = new Koa()
 
   // Container is configured with our services and whatnot.
-  const container = (app.container = configureContainer())
+  const container = (app.container = await configureContainer())
   app
     // Top middleware is the error handler.
     .use(errorHandler)

@@ -1,12 +1,11 @@
-const { BadRequest } = require('fejl')
-
 class DeviceService {
   constructor(deviceStore, logger) {
-    // this.logger = logger
+    this.logger = logger
     this.deviceStore = deviceStore
   }
-  async createDevice(data) {
-    BadRequest.assert(data, 'No device payload given')
+  async create(data) {
+    this.logger.info(data)
+    console.log(data)
     return this.deviceStore.create(data)
   }
 }

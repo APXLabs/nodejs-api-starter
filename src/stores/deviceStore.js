@@ -1,16 +1,16 @@
-async function deviceStore(db, logger) {
-  logger.info(db.db)
+function deviceStore(mongodb, logger) {
   let collection
   try {
-    collection = await db.db.collection('devices')
+    collection = mongodb.db.collection('devices')
   } catch (err) {
     logger.error(err)
   }
 
   return {
     async create(data) {
+      logger.info(data)
       try {
-        return collection.insertMany(data)
+        return collection.insertOne(data)
       } catch (err) {
         logger.error('Error inserting to MongoDB')
       }
