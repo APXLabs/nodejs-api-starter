@@ -42,9 +42,7 @@ createServer()
   .then(app => {
     app.listen(env.PORT, env.LISTEN_IP, () => {
       const mode = env.NODE_ENV
-      console.debug(
-        `Server listening on ${env.LISTEN_IP}:${env.PORT} in ${mode} mode`
-      )
+      console.debug(`Server listening on ${env.LISTEN_IP}:${env.PORT} in ${mode} mode`)
     })
   })
   .catch(err => {

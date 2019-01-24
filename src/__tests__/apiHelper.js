@@ -29,9 +29,7 @@ function assertStatus(status) {
   return async function statusAsserter(resp) {
     if (resp.status !== status) {
       throw new Error(
-        `Expected ${status} but got ${resp.status}: ${resp.request.method} ${
-          resp.request.path
-        }`
+        `Expected ${status} but got ${resp.status}: ${resp.request.method} ${resp.request.path}`
       )
     }
     return resp.data

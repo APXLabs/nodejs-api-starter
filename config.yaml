@@ -7,16 +7,23 @@ logger:
       outputFormat: rich
 
 mongodb:
-  host: mongo
+  host: mongo-rs0-1
   port: 27017
   username: ''
   password: ''
   database: skylight
+  replicas:
+    - host: mongo-rs0-2
+      port: 27017
+    - host: mongo-rs0-3
+      port: 27017
   options:
-    replicaSet: ''
-    connectTimeoutMS: 3000
-    reconnectTries: 15
+    useNewUrlParser: true
+    replicaSet: 'rs0'
     readPreference: primaryPreferred
+
+mongoose:
+  useNewUrlParser: true
 
 amqp:
   hostname: localhost

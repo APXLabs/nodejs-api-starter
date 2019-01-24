@@ -16,22 +16,12 @@ RUN mkdir -p /opt/app
 WORKDIR /opt
 
 # Install NodeJS in a different location for easier app bind mounting for local development
-
 COPY . ./
 RUN set -ex; \
-  if [ "$NODE_ENV" = "production" ]; then \
-  yarn install --silent --no-cache --frozen-lockfile --production --prefer-offline; \
-  elif [ "$NODE_ENV" = "test" ]; then \
-  touch yarn-error.log; \
-  mkdir -m 777 src; \
-  yarn install --no-cache --frozen-lockfile; \
-  chown -R node:node src node_modules package.json yarn.lock yarn-error.log; \
-  else \
-  touch yarn-error.log; \
-  mkdir -p -m 777 src node_modules /home/node/.cache/yarn; \
-  yarn install --frozen-lockfile; \
-  chown -R node:node src node_modules package.json yarn.lock config.yaml yarn-error.log /home/node/.cache/yarn; \
-  fi;
+  echo 'yarn-offline-mirror "./.yarn-offline"' > /opt/.yarnrc \
+  yarn install --production --frozen-lockfile --offline \
+  rm -rf /opt/.yarn-offline
+
 ENV PATH /opt/node_modules/.bin:$PATH
 
 WORKDIR /opt/app

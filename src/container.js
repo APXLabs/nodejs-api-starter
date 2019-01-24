@@ -1,5 +1,6 @@
 const { createContainer, Lifetime, InjectionMode, asValue } = require('awilix')
-const mongodb = require('@upskill/nucleus-mongodb')
+// const mongodb = require('@upskill/nucleus-mongodb')
+const Mongoose = require('./mongoose')
 
 // Initialize Configurator
 const config = require('./config')
@@ -25,17 +26,10 @@ const modulesToLoad = [
  * @return {Object} The container.
  */
 async function configureContainer() {
-  // Initialize MongoDB
-  await mongodb
-    .connect(
-      config.mongodb,
-      logger
-    )
-    .catch(err => {
-      logger.error(err)
-      process.exit(1)
-    })
-
+  const mongoose = new Mongoose(logger)
+  await mongoose.connect(config.mongodb, config.mongoose).catch(err => {
+    logger.error(`Error connecting to MongoDB`, err)
+  })
   const opts = {
     // Classic means Awilix will look at function parameter
     // names rather than passing a Proxy.
@@ -53,7 +47,8 @@ async function configureContainer() {
       // Our logger is already constructed,
       // so provide it as-is to anyone who wants it.
       logger: asValue(logger),
-      mongodb: asValue(mongodb)
+      mongodb: asValue(mongoose),
+      config: asValue(config)
     })
 }
 
