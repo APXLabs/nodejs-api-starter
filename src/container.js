@@ -2,25 +2,25 @@ const { createContainer, asClass, asFunction, asValue } = require('awilix')
 const { scopePerRequest } = require('awilix-koa')
 
 const config = require('../config')
-const Application = require('./app/Application')
+const App = require('./app')
 
-const Server = require('./interfaces/http/Server')
+const Server = require('./server')
 const DeviceService = require('./services/DeviceService')
 
-const logger = require('./infrastructure/logging/logger')
-const MongooseDevicesRepository = require('./infrastructure/device/MongooseDevicesRepository')
-const { database, Device: DeviceModel } = require('./infrastructure/mongo/models')
+const logger = require('./logger')
+const DeviceRepository = require('./database/repositories/DeviceRepository')
+const { database, Device: DeviceModel } = require('./database/models')
 
 const container = createContainer()
 
 // System
 container
   .register({
-    app: asClass(Application).singleton(),
+    app: asClass(App).singleton(),
     server: asClass(Server).singleton()
   })
   .register({
-    logger: asFunction(logger).singleton()
+    logger: asFunction(logger)
   })
   .register({
     config: asValue(config)
@@ -37,13 +37,13 @@ container.register({
 
 // Repositories
 container.register({
-  DeviceRepository: asClass(MongooseDevicesRepository).singleton()
+  DeviceRepository: asClass(DeviceRepository).singleton()
 })
 
 // Database
 container.register({
   database: asValue(database),
-  DeviceMongoModel: asFunction(DeviceModel).singleton()
+  DeviceModel: asFunction(DeviceModel).singleton()
 })
 
 module.exports = container
