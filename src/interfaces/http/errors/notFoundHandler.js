@@ -3,9 +3,10 @@
  */
 async function notFoundHandler(ctx) {
   const msg = `${ctx.request.method} ${ctx.request.path}`
-  ctx.notFound({
+  ctx.response.status = 404
+  ctx.response.body = {
     message: `No endpoint matched your request: ${msg}`
-  })
+  }
 }
 
 module.exports = notFoundHandler

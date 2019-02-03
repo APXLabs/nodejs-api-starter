@@ -7,19 +7,13 @@ logger:
       outputFormat: rich
 
 mongodb:
-  host: mongo-rs0-1
+  host: localhost
   port: 27017
   username: ''
   password: ''
   database: skylight
-  replicas:
-    - host: mongo-rs0-2
-      port: 27017
-    - host: mongo-rs0-3
-      port: 27017
   options:
     useNewUrlParser: true
-    replicaSet: 'rs0'
     readPreference: primaryPreferred
 
 mongoose:

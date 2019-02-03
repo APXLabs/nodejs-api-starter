@@ -1,16 +1,14 @@
-const Device = require('src/domain/Device/Device')
+const Device = require('src/domain/device/Device')
 
 const MongooseDeviceMapper = {
   toEntity({ dataValues }) {
-    const { id, name } = dataValues
+    const { _id, name } = dataValues
 
-    return new Device({ id, name })
+    return new Device({ _id, name })
   },
 
-  toDatabase(device) {
-    const { name } = device
-
-    return { name }
+  toDatabase(Model, device) {
+    return new Model(device)
   }
 }
 

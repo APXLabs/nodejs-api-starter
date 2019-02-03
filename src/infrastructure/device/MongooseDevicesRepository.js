@@ -1,22 +1,10 @@
-const DeviceMapper = require('./SequelizeDeviceMapper')
-
 class MongooseDevicesRepository {
-  constructor({ DeviceModel }) {
-    this.DeviceModel = DeviceModel
+  constructor({ DeviceMongoModel }) {
+    this.Device = DeviceMongoModel
   }
 
-  async add(device) {
-    const { valid, errors } = device.validate()
-
-    if (!valid) {
-      const error = new Error('ValidationError')
-      error.details = errors
-
-      throw error
-    }
-
-    const newDevice = await this.DeviceModel.create(DeviceMapper.toDatabase(device))
-    return DeviceMapper.toEntity(newDevice)
+  async add(data) {
+    return this.Device.create(data)
   }
 }
 module.exports = MongooseDevicesRepository

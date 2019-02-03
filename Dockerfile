@@ -16,7 +16,8 @@ RUN mkdir -p /opt/app
 WORKDIR /opt
 
 # Install NodeJS in a different location for easier app bind mounting for local development
-COPY . ./
+COPY .yarn-offline .yarn-offline
+COPY package.json yarn.lock ./
 RUN set -ex; \
   echo 'yarn-offline-mirror "./.yarn-offline"' > /opt/.yarnrc \
   yarn install --production --frozen-lockfile --offline \

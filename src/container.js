@@ -3,17 +3,13 @@ const { scopePerRequest } = require('awilix-koa')
 
 const config = require('../config')
 const Application = require('./app/Application')
-const { CreateDevice } = require('./app/user')
-
-const DeviceSerializer = require('./interfaces/http/device/DeviceSerializer')
 
 const Server = require('./interfaces/http/Server')
-const router = require('./interfaces/http/router')
-const errorHandler = require('./interfaces/http/errors/errorHandler')
+const DeviceService = require('./services/DeviceService')
 
-const logger = require('./infra/logging/logger')
-const MongooseDevicesRepository = require('./infra/device/MongooseDevicesRepository')
-const { database, Device: DeviceModel } = require('./infra/database/models')
+const logger = require('./infrastructure/logging/logger')
+const MongooseDevicesRepository = require('./infrastructure/device/MongooseDevicesRepository')
+const { database, Device: DeviceModel } = require('./infrastructure/mongo/models')
 
 const container = createContainer()
 
@@ -24,7 +20,6 @@ container
     server: asClass(Server).singleton()
   })
   .register({
-    router: asFunction(router).singleton(),
     logger: asFunction(logger).singleton()
   })
   .register({
@@ -33,29 +28,22 @@ container
 
 // Middlewares
 container.register({
-  containerMiddleware: asValue(scopePerRequest(container)),
-  errorHandler: asValue(errorHandler)
+  containerMiddleware: asValue(scopePerRequest(container))
+})
+// Services
+container.register({
+  DeviceService: asClass(DeviceService)
 })
 
 // Repositories
 container.register({
-  DevicesRepository: asClass(MongooseDevicesRepository).singleton()
+  DeviceRepository: asClass(MongooseDevicesRepository).singleton()
 })
 
 // Database
 container.register({
   database: asValue(database),
-  DeviceModel: asValue(DeviceModel)
-})
-
-// Operations
-container.register({
-  createDevice: asClass(CreateDevice)
-})
-
-// Serializers
-container.register({
-  DeviceSerializer: asValue(DeviceSerializer)
+  DeviceMongoModel: asFunction(DeviceModel).singleton()
 })
 
 module.exports = container

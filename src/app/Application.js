@@ -3,10 +3,6 @@ class Application {
     this.server = server
     this.database = database
     this.logger = logger
-
-    if (database && database.options.logging) {
-      database.options.logging = logger.info.bind(logger)
-    }
   }
 
   async start() {

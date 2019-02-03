@@ -1,6 +1,6 @@
-const { ModelsLoader } = require('src/infra/mongoose')
-const Mongoose = require('mongoose')
-const { db: config } = require('config')
+const { ModelsLoader } = require('src/infrastructure/mongoose')
+const Mongoose = require('./mongoose')
+const config = require('config')
 
 if (config) {
   const mongoose = new Mongoose(config)
@@ -12,5 +12,4 @@ if (config) {
 } else {
   /* eslint-disable no-console */
   console.error('Database configuration not found, disabling database.')
-  /* eslint-enable no-console */
 }

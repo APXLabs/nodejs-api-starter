@@ -10,17 +10,10 @@ module.exports = {
         return file.indexOf('.') !== 0 && file !== indexFile && file.slice(-3) === '.js'
       })
       .forEach(file => {
-        const model = mongoose['import'](path.join(baseFolder, file))
+        const model = require(path.join(baseFolder, file))
         const modelName = file.split('.')[0]
         loaded[modelName] = model
       })
-
-    Object.keys(loaded).forEach(modelName => {
-      if (loaded[modelName].associate) {
-        loaded[modelName].associate(loaded)
-      }
-    })
-
     loaded.database = mongoose
 
     return loaded
