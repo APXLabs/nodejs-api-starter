@@ -11,8 +11,6 @@
     "@upskill/nucleus-mongodb": "github:APXLabs/nucleus-mongodb",
     "awilix": "^4.0.1",
     "awilix-koa": "^3.0.1",
-    "fejl": "^1.0.2",
-    "keyblade": "^0.3.2",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-compress": "^3.0.0",

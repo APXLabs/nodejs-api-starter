@@ -21,17 +21,6 @@
       "remoteRoot": "/opt/app"
     },
     {
-      "name": "Docker Test (Attach 9230 --inspect)",
-      "type": "node",
-      "request": "attach",
-      "protocol": "inspector",
-      "port": 9230,
-      "localRoot": "${workspaceRoot}",
-      "remoteRoot": "/opt/app",
-      "preLaunchTask": "Docker yarn test-wait-debugger", // See ./tasks.json
-      "internalConsoleOptions": "openOnSessionStart"
-    },
-    {
       "type": "node",
       "request": "launch",
       "name": "Jest All",
