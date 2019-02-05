@@ -1,3 +1,4 @@
+const bodyParser = require('koa-bodyparser')
 const { createController } = require('awilix-koa')
 
 const api = ({ DeviceService }) => ({
@@ -10,4 +11,8 @@ const api = ({ DeviceService }) => ({
   }
 })
 
-module.exports = createController(api).post('/devices', 'createDevice')
+module.exports = createController(api)
+  .prefix('/devices')
+  .post('', 'createDevice', {
+    before: [bodyParser()] // Run bodyParser just for this endpoint
+  })

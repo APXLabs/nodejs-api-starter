@@ -10,7 +10,6 @@ class Server {
     if (this.database) {
       await this.database.connect()
     }
-
     await this.app.start()
   }
 }

@@ -1,6 +1,6 @@
-const ModelsLoader = require('src/database/ModelsLoader')
-const Mongoose = require('src/database/mongoose')
-const config = require('config')
+const ModelsLoader = require('../ModelsLoader')
+const Mongoose = require('../mongoose')
+const config = require('../../../config')
 
 if (config) {
   // Initializes connection to MongoDB

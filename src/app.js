@@ -1,6 +1,5 @@
 const Koa = require('koa')
 const { loadControllers } = require('awilix-koa')
-const bodyParser = require('koa-bodyparser')
 const errorHandler = require('./middleware/errors/errorHandler')
 const notFoundHandler = require('./middleware/errors/notFoundHandler')
 
@@ -15,10 +14,8 @@ class App {
       // Creates an Awilix scope per request. Check out the awilix-koa
       // docs for details: https://github.com/jeffijoe/awilix-koa
       .use(containerMiddleware)
-      // Parses request bodies.
-      .use(bodyParser())
       // Load routes (API "controllers")
-      .use(loadControllers('./device/*.js', { cwd: __dirname }))
+      .use(loadControllers('./controllers/*.js', { cwd: __dirname }))
       // Default handler when nothing stopped the chain.
       .use(notFoundHandler)
   }

@@ -20,10 +20,10 @@ container
     server: asClass(Server).singleton()
   })
   .register({
-    logger: asFunction(logger)
+    config: asValue(config)
   })
   .register({
-    config: asValue(config)
+    logger: asFunction(logger).singleton()
   })
 
 // Middlewares

@@ -1,5 +1,5 @@
 /* global check gen:true */
-const DeviceService = require('src/services/DeviceService')
+const DeviceService = require('../../../services/DeviceService')
 require('jasmine-check').install()
 const faker = require('faker')
 
@@ -16,7 +16,7 @@ describe('Device Service :: add', () => {
         DeviceRepository: MockDeviceRepository
       })
     })
-    test('When adding a valid device, ensure the name of the device is resolved', async () => {
+    test('Ensure the name of the device is resolved', async () => {
       const deviceData = { name: 'New Device', platform: 'Android' }
       await expect(deviceService.add(deviceData)).resolves.toBe('New Device')
     })
@@ -35,7 +35,7 @@ describe('Device Service :: add', () => {
       faker.name.findName(),
       async name => {
         const deviceData = { name }
-        await expect(deviceService.add(deviceData)).toBe(name)
+        await expect(deviceService.add(deviceData)).resolves.toBe(name)
       }
     )
   })

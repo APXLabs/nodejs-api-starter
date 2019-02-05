@@ -38,17 +38,13 @@
     "supertest": "^3.4.2"
   },
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --inspect=0.0.0.0:9229 index.js",
+    "test": "jest",
+    "test-watch": "jest -i --watch",
+    "test-docker": "env NODE_ENV=test PORT=8081 jest",
+    "test-wait-debugger": "env NODE_ENV=test PORT=8081 nodemon --inspect-brk=0.0.0.0:9230 ../node_modules/.bin/jest",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
-    "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
-    "test": "env NODE_PATH=. jest",
-    "build": "node tools/build.js",
-    "build-watch": "node tools/build.js --watch",
-    "docker": "docker-compose run --rm api yarn",
-    "docker-install": "docker-compose run --rm --no-deps api yarn install",
-    "docker-upgrade": "docker-compose run --rm --no-deps api yarn upgrade",
-    "docker-test": "docker-compose run api yarn install && yarn test",
-    "docker-test-watch": "docker-compose run api yarn install && yarn test --watch",
-    "dev": "env NODE_PATH=. nodemon index.js",
-    "start": "node index.js"
+    "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix ."
   }
 }
