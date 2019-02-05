@@ -1,10 +1,3 @@
-/**
- * A Service that deals with devices. The Service assumes that the input data
- * has been validated
- * @param {Object} Repository
- * @param {Object} Repository.DeviceRepository a repository for devices
- *
- */
 class DeviceService {
   constructor({ DeviceRepository }) {
     this.repository = DeviceRepository

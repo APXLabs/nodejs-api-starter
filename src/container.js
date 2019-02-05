@@ -23,7 +23,7 @@ container
     config: asValue(config)
   })
   .register({
-    logger: asFunction(logger).singleton()
+    logger: asValue(logger)
   })
 
 // Middlewares
