@@ -1,11 +1,11 @@
 class UserRepository {
   constructor({ UserModel }) {
-    this.Device = UserModel
+    this.User = UserModel
   }
 
   async add(data) {
-    console.log('user stored!')
-    // return this.Device.create(data)
+    const newDevice = new this.User(data)
+    return newDevice.save()
   }
 }
 module.exports = UserRepository

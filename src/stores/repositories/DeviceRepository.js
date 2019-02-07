@@ -4,8 +4,7 @@ class DeviceRepository {
   }
 
   async add(data) {
-    console.log('device stored!')
-    // return this.Device.create(data)
+    return this.Device.create(data)
   }
 }
 module.exports = DeviceRepository

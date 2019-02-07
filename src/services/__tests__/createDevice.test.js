@@ -1,5 +1,5 @@
 /* global check gen:true */
-const DeviceService = require('../../../services/DeviceService')
+const DeviceService = require('../DeviceService')
 require('jasmine-check').install()
 const faker = require('faker')
 

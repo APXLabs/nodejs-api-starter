@@ -20,7 +20,7 @@ async function errorHandler(ctx, next) {
     } else {
       ctx.body = { error: 'Internal Server Error' }
     }
-    logger[err.level](`<-- ${ctx.ip} ${ctx.method} ${ctx.url} ${ctx.status} ${err}`)
+    logger[err.level](`<-- ${ctx.ip} ${ctx.method} ${ctx.url} ${ctx.status} ${err.stack}`)
   }
 }
 

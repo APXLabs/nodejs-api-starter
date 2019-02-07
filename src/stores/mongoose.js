@@ -6,6 +6,7 @@ class Mongoose {
   constructor(config, logger) {
     this.mongoose = mongoose
     this.mongoose.Promise = global.Promise
+    this.mongoose.set('bufferCommands', false)
     this.logger = logger
     this.connectionConfig = config.mongodb
     this.mongooseConfig = config.mongoose || {}
