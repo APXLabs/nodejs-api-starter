@@ -2,7 +2,7 @@ const ModelsLoader = require('../ModelsLoader')
 const Mongoose = require('../mongoose')
 const config = require('../../../config')
 
-if (config) {
+if (config.mongodb) {
   // Initializes connection to MongoDB
   const mongoose = new Mongoose(config)
 

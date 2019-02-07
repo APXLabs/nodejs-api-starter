@@ -1,8 +1,15 @@
-const container = require('./src/container')
+const createServer = require('./src/server')
+const config = require('./config')
+const logger = require('./src/logger')
 
-const server = container.resolve('server')
-
-server.start().catch(error => {
-  server.logger.error(error.stack)
-  process.exit()
-})
+createServer().then(
+  app =>
+    app.listen(config.port, () => {
+      const mode = config.node_env
+      logger.info(`[p ${process.pid}] Listening at port ${config.port} in ${mode} mode`)
+    }),
+  err => {
+    logger.error('Error while starting up server', err)
+    process.exit(1)
+  }
+)

@@ -12,10 +12,10 @@ async function errorHandler(ctx, next) {
     /* eslint-disable-next-line no-ex-assign */
     if (!(err instanceof Error)) err = new Error(err)
 
-    ctx.status = err.status || err.statusCode || 500
+    ctx.status = err.status || 500
     err.level = err.status < 500 ? 'warn' : 'error'
 
-    if (err.status < 500) {
+    if (ctx.status < 500) {
       ctx.body = { error: err.message }
     } else {
       ctx.body = { error: 'Internal Server Error' }

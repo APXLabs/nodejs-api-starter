@@ -13,6 +13,7 @@
     "awilix-koa": "^3.0.1",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
     "koa-respond": "^1.0.1",
     "mongoose": "^5.4.4",
@@ -38,6 +39,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon --inspect=0.0.0.0:9229 index.js",
+    "dev-wait": "nodemon --inspect-brk=0.0.0.0:9229 index.js",
     "test": "jest",
     "test-watch": "jest -i --watch",
     "test-docker": "env NODE_ENV=test PORT=8081 jest",
