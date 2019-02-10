@@ -14,6 +14,8 @@ services:
     volumes:
       # https://docs.docker.com/docker-for-mac/osxfs-caching/
       - .:/opt/app:delegated
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
     command: ../node_modules/.bin/nodemon --inspect=0.0.0.0:9229 index.js
     depends_on:
       - mongo

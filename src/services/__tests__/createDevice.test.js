@@ -55,19 +55,3 @@ describe('Device Service :: add', () => {
     })
   })
 })
-
-// function setup() {
-//   const todos = [
-//     { id: '1', title: 'Todo 1', completed: true },
-//     { id: '2', title: 'Todo 2', completed: false }
-//   ]
-//   // Mock store
-//   const store = {
-//     find: jest.fn(async () => [...todos]),
-//     get: jest.fn(async id => todos.find(x => x.id === id)),
-//     create: jest.fn(async data => ({ ...data })),
-//     update: jest.fn(async (id, data) => ({ ...data })),
-//     remove: jest.fn(async id => undefined)
-//   }
-//   return { service: new TodoService(store), store, todos }
-// }

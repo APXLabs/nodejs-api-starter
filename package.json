@@ -37,10 +37,9 @@
     "start": "node index.js",
     "dev": "nodemon --inspect=0.0.0.0:9229 index.js",
     "dev-wait": "nodemon --inspect-brk=0.0.0.0:9229 index.js",
-    "test": "jest",
-    "test-watch": "jest -i",
-    "test-docker": "env NODE_ENV=test PORT=8081 jest",
-    "test-wait-debugger": "env NODE_ENV=test PORT=8081 nodemon --inspect-brk=0.0.0.0:9230 node_modules/.bin/jest",
+    "test": " NODE_ENV=test jest",
+    "test-watch": "NODE_ENV=test jest --watchAll",
+    "test-wait-debugger": "env NODE_ENV=test nodemon --inspect-brk=0.0.0.0:9230 node_modules/.bin/jest",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix ."
   }
