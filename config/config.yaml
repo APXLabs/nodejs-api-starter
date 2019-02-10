@@ -8,7 +8,7 @@ logger:
       outputFormat: rich
 
 mongodb:
-  host: mongo
+  host: localhost
   port: 27017
   username: ''
   password: ''

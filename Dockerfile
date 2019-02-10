@@ -37,4 +37,4 @@ COPY . .
 
 USER node
 
-CMD ["yarn", "index.js" ]
+CMD ["yarn", "start" ]
