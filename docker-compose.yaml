@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    hostname: api
+    ports:
+      - '3000:3000'
+      - '9229:9229' # V8 inspector for debugging
+      - '9230:9230'
+    volumes:
+      # https://docs.docker.com/docker-for-mac/osxfs-caching/
+      - .:/opt/app:delegated
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+    command: ../node_modules/.bin/nodemon --inspect=0.0.0.0:9229 index.js
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:3.4
+    ports:
+      - '27017:27017'

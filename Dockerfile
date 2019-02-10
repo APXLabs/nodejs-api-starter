@@ -1,31 +1,40 @@
-FROM node:8.11.3-alpine
+FROM node:8.15.0-alpine as builder
 
+ARG SSH_PRIVATE_KEY
+
+COPY package.json yarn.lock* ./
+
+RUN apk add --update --no-cache openssh git && \
+  mkdir -p /root/.ssh && \
+  chmod 0700 /root/.ssh && \
+  ssh-keyscan github.com > /root/.ssh/known_hosts && \
+  echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa && \
+  chmod 600 /root/.ssh/id_rsa && \
+  yarn install --pure-lockfile --ignore-optional && yarn cache clean && \
+  rm -rf /root/.ssh/
+
+
+FROM node:10.15.0-alpine
+
+# set our node environment, either development or production
+# defaults to production, compose overrides this to development on build and run
 ARG NODE_ENV=production
-ENV NODE_ENV=$NODE_ENV
+ENV NODE_ENV $NODE_ENV
 
-# Set a working directory
-WORKDIR /usr/src/app
+# default to port 3000 for node, and 9229 and 9230 (tests) for debug
+ARG PORT=3000
+ENV PORT $PORT
+EXPOSE $PORT 9229 9230
 
-# Install Node.js dependencies
-COPY package.json yarn.lock ./
-RUN set -ex; \
-  if [ "$NODE_ENV" = "production" ]; then \
-  yarn install --silent --no-cache --frozen-lockfile --production; \
-  elif [ "$NODE_ENV" = "test" ]; then \
-  touch yarn-error.log; \
-  mkdir -m 777 build; \
-  yarn install --no-cache --frozen-lockfile; \
-  chown -R node:node build node_modules package.json yarn.lock yarn-error.log; \
-  else \
-  touch yarn-error.log; \
-  mkdir -p -m 777 build node_modules /home/node/.cache/yarn; \
-  chown -R node:node build node_modules package.json yarn.lock yarn-error.log /home/node/.cache/yarn; \
-  fi;
+# install dependencies first, in a different location for easier app bind mounting for local development
+WORKDIR /opt
+COPY --from=builder node_modules node_modules/
+ENV PATH /opt/node_modules/.bin:$PATH
 
-# Attempts to copy "build" folder even if it doesn't exist
-COPY .env build* ./build/
+# copy in our source code last, as it changes the most
+WORKDIR /opt/app
+COPY . .
 
-# Run the container under "node" user by default
 USER node
 
-CMD [ "node", "build/server.js" ]
+CMD ["yarn", "start" ]

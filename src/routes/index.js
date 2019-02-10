@@ -1,13 +1,18 @@
-import Router from 'koa-router';
+const fs = require('fs')
+const path = require('path')
 
-const router = new Router();
+const loadRouters = () => {
+  const indexFile = 'index.js'
+  const routers = []
+  fs.readdirSync(__dirname)
+    .filter(file => {
+      return file.indexOf('.') !== 0 && file !== indexFile && file.slice(-3) === '.js'
+    })
+    .forEach(file => {
+      const router = require(path.join(__dirname, file))
+      routers.push(router)
+    })
+  return routers
+}
 
-router.get(`/`, ctx => {
-  ctx.body = 'Hello World!';
-});
-
-router.get(`/error`, () => {
-  throw new Error('Internal Server Error');
-});
-
-export default router;
+module.exports = loadRouters

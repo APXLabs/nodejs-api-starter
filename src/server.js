@@ -1,35 +1,35 @@
-/* eslint-disable no-console, no-shadow */
+const Koa = require('koa')
+const { scopePerRequest } = require('awilix-koa')
+const http = require('http')
 
-import app from './app';
-import env from './env';
+const errorHandler = require('./middleware/errors/errorHandler')
+const notFoundHandler = require('./middleware/errors/notFoundHandler')
+const configureContainer = require('./container')
+const router = require('./router')
+const logger = require('./logger')
 
-const port = env.PORT;
-const host = env.LISTEN_IP;
+const createApp = async () => {
+  const app = new Koa()
+  const container = (app.container = await configureContainer())
+  app
+    // Top middleware is the error handler.
+    .use(errorHandler)
+    // Creates an Awilix scope per request. Check out the awilix-koa
+    // docs for details: https://github.com/jeffijoe/awilix-koa
+    .use(scopePerRequest(container))
+    // Load routes (API "controllers")
+    .use(router())
+    // Default handler when nothing stopped the chain.
+    .use(notFoundHandler)
 
-// Launch Node.js server
-const server = app.listen(port, host, () => {
-  console.log(`Server is listening on http://${host}:${port}/`);
-});
+  const server = http.createServer(app.callback())
+  server.on('close', async () => {
+    // Close resources
+    container.resolve('database').close()
+    logger.debug('Server closing, bye!')
+  })
 
-// Shutdown Node.js app gracefully
-function handleExit(options, err) {
-  if (options.cleanup) {
-    const actions = [server.close];
-    actions.forEach((close, i) => {
-      try {
-        close(() => {
-          if (i === actions.length - 1) process.exit();
-        });
-      } catch (err) {
-        if (i === actions.length - 1) process.exit();
-      }
-    });
-  }
-  if (err) console.log(err);
-  if (options.exit) process.exit();
+  return server
 }
 
-process.on('exit', handleExit.bind(null, { cleanup: true }));
-process.on('SIGINT', handleExit.bind(null, { exit: true }));
-process.on('SIGTERM', handleExit.bind(null, { exit: true }));
-process.on('uncaughtException', handleExit.bind(null, { exit: true }));
+module.exports = createApp
