@@ -77,6 +77,9 @@ class Mongoose {
       resolve()
     })
   }
+  async close() {
+    if (this.mongoose.connection) await this.mongoose.connection.close()
+  }
 }
 
 module.exports = Mongoose

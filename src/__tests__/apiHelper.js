@@ -1,7 +1,6 @@
-const createApp = require('../app')
-const request = require('supertest')
+const createServer = require('../server')
 const apiHelper = async () => {
-  return (await createApp()).listen()
+  return createServer()
 }
 
-module.exports = async () => request(await apiHelper())
+module.exports = async () => apiHelper()
